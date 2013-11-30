@@ -13,7 +13,6 @@ twitterのつぶやきをWiresharkの「Info」欄に表示させるRubyスク�
 0. Linux環境を用意
 
 1. [Trema](https://github.com/trema/trema)を入れる
-
     * pio が入れば良いような気もするようなしないような…
 	
 2. こんなのをインストール
