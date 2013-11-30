@@ -5,6 +5,7 @@ Packetter
 --------
 
 twitterのつぶやきをWiresharkの「Info」欄に表示させるRubyスクリプト。
+[ここ](https://speakerdeck.com/gocard/packetter)にちょっと詳しく載っています。
 
 
 準備
@@ -19,6 +20,7 @@ twitterのつぶやきをWiresharkの「Info」欄に表示させるRubyスク�
 2. こんなのをインストール
 
 	`$ gem install twitter # 居るのこれ`
+	
 	`$ gem install tweetstream`
 
 3. CONSUMER_KEYなどを設定(packetter.rb内)
