@@ -27,7 +27,7 @@ Packetter
 実行例
 ------
 
-![sample.pcap](sample.png)
+![sample.pcap](sample.png "sample.pcapを開いた")
 
 
 ソースコードのパクリ元と参考情報
