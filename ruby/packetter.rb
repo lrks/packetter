@@ -115,12 +115,22 @@ end
 #*                                ここから本番                                *#
 #*----------------------------------------------------------------------------*#
 #
+# 設定
+#
+load '../config/twitter.conf'
+load '../config/packet.conf'
+
+twitter_config = $api
+packet_config = $packet
+
+
+#
 # パケット下準備
 #
 pkt = Packet.new()
-pkt.setInterface("lo")	# 茜新社かな?
-pkt.setMacAddress("54:52:00:01:00:02", "04:20:9a:44:cf:63")
-pkt.setIpAddress("192.168.39.39", "192.168.114.51")
+pkt.setInterface(packet_config[:interface])
+pkt.setMacAddress(packet_config[:eth][:dst], packet_config[:eth][:src])
+pkt.setIpAddress(packet_config[:nw][:dst], packet_config[:nw][:src])
 pkt.setPortNumber(80, 25252)
 pkt.setSeqAckNumber(0x0, 0x0)
 pkt.setControlFlag(Pio::TcpHeader::CF_ACK)
@@ -139,10 +149,10 @@ pkt.setPioOption([
 # Twitter下準備
 #
 TweetStream.configure do |config|
-	config.consumer_key = 'CONSUMER_KEY'
-	config.consumer_secret = 'CONSUMER_SECRET'
-	config.oauth_token = 'OAUTH_TOKEN'
-	config.oauth_token_secret = 'OAUTH_TOKEN_SECRET'
+	config.consumer_key = twitter_config[:consumer_key]
+	config.consumer_secret = twitter_config[:consumer_secret]
+	config.oauth_token = twitter_config[:token]
+	config.oauth_token_secret = twitter_config[:token_secret]
 	config.auth_method = :oauth 
 end
 
@@ -155,11 +165,16 @@ pkt.printLog()
 # TL取ってくる
 client = TweetStream::Client.new
 client.userstream do |status|
-	# 下ごしらえ
-	name = status.user.screen_name
-	text = uriEncode(status.text)
+	Thread.new do
+		name = status.user.screen_name
+		text = packet_config[:unicode] ? status.text : uriEncode(status.text)
+		method = 
+			(!twitter_config[:user].nil? && twitter_config[:user] == name) ? 
+			'POST' : 
+			'GET'
 
-	# 表示
-	pkt.sendPacket("GET /#{name} => #{text} HTTP/1.1\r\n\r\n");
+		# 表示
+		pkt.sendPacket("#{method} /#{name} => #{text} HTTP/1.1\r\n\r\n");
+	end
 end
 
