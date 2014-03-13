@@ -19,33 +19,33 @@ Wireshark側のフォントを変えれば、日本語も表示可能です。
 1. [Trema](https://github.com/trema/trema)を入れる
 
     * pio が入ればどうでも良いです。
-	* でも、Tremaはオススメなので入れましょう。
-	* Open vSwitchや、最近のOFSを持っている人は、[Trema-edge](https://github.com/trema/trema-edge)もオススメです。
-	* Ryu...?
-	
+    * でも、Tremaはオススメなので入れましょう。
+    * Open vSwitchや、最近のOFSを持っている人は、[Trema-edge](https://github.com/trema/trema-edge)もオススメです。
+    * Ryu...?
+    
 2. tweetstream をインストール
 
-	`$ gem install tweetstream`
+    `$ gem install tweetstream`
 
 3. CONSUMER_KEYなどを設定
-	
-	`$ cd ./config`
-	`$ mv twitter.conf.sample twitter.conf`
-	`$ vim twitter.conf`
-	
+    
+    `$ cd ./config`
+    `$ mv twitter.conf.sample twitter.conf`
+    `$ vim twitter.conf`
+    
 4. ./config/packet.conf を弄ったり
 
-	* `:nw => {`...とか書いていますが、実際のネットワーク環境には影響しません。
-	* 作成されるパケットの情報に影響するだけです。
-	* そうした意味では、実在しないホストのほうが良いかも?
-	
+    * `:nw => {`...とか書いていますが、実際のネットワーク環境には影響しません。
+    * 作成されるパケットの情報に影響するだけです。
+    * そうした意味では、実在しないホストのほうが良いかも?
+    
 
 使い方
 ------
 
 1. 実行
 
-	`$ ruby packetter.rb`
+    `$ ruby packetter.rb`
 
 2. 「これでフィルタしてね」と言ってくるので、Wiresharkなどで見る
 
