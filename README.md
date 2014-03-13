@@ -6,6 +6,7 @@ Packetter
 
 twitterのつぶやきをWiresharkの「Info」欄に表示させるRubyスクリプトと、
 便利に(?)使うためのWiresharkプラグインです。
+Wireshark側のフォントを変えれば、日本語も表示可能です。
 
 [ここ](https://speakerdeck.com/gocard/packetter-1)にちょっと詳しく載っています。
 
